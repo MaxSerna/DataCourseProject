@@ -2,15 +2,7 @@
 #### Max Serna
 #### 27/09/2020
 
-<style>
-    .reveal .slides {
-        text-align: justify;
-    }
-    .reveal .slides section>* {
-        margin-left: 0;
-        margin-right: 0;
-    }
-</style>
+<p style="text-align: justify;">
 
 In this repository I will submit my work on the Coursera's Getting and Cleaning Data Course Project.
 The instructions for it say as following:
@@ -62,3 +54,4 @@ used to complete the assignment. Refer to it for any doubt about the script. The
 named `CodeBook.Rmd`, which is located in here too.
 Alternatively, a PDF file can be found in this repository, as well as the R Markdown script that was used to construct it (see `CodeBookPDF.Rmd`). There are only a few differences between the two `Rmd` scripts that do not alter the code but just the display format.
 
+</p>
