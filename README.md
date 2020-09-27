@@ -2,6 +2,7 @@
 #### Max Serna
 #### 27/09/2020
 
+<div style="text-align: justify">
 In this repository I will submit my work on the Coursera?s Getting and Cleaning Data Course Project.
 The instructions for it say as following:
 
@@ -46,4 +47,4 @@ This is the script to run the instructions.
 This is the R Markdown file that contains the CodeBook for this project. I recommend the reader to visit (https://maxserna.github.io/DataCourseProject/) to have the complete view. I describe all the data and the code
 used to complete the assignment. Refer to it for any doubt about the script.
 
-
+</div>
