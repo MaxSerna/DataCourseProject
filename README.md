@@ -2,10 +2,7 @@
 #### Max Serna
 #### 27/09/2020
 
-<style>
-body {
-text-align: justify}
-</style>
+<style>body {text-align: justify}</style>
 
 In this repository I will submit my work on the Coursera's Getting and Cleaning Data Course Project.
 The instructions for it say as following:
