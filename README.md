@@ -37,11 +37,13 @@ You should create one R script called run_analysis.R that does the following.
 
 ## Files in this repository
 
-* *Codebook.Rmd*
-
-This is de R Markdown file that contains the CodeBook for this project. I recommend the reader to visit (https://maxserna.github.io/DataCourseProject/) to have the complete view.
-
 * *run_analysis.R*
 
 This is the script to run the instructions.
+
+* *Codebook.Rmd*
+
+This is de R Markdown file that contains the CodeBook for this project. I recommend the reader to visit (https://maxserna.github.io/DataCourseProject/) to have the complete view. I describe all the data and the code
+used to complete the assignment. Refer to it for any doubt about the script.
+
 
