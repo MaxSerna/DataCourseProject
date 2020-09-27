@@ -1,0 +1,168 @@
+---
+title: "Getting and Cleaning Data Course Project."
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'Codebook.html'))})
+subtitle: "Codebook"
+author: "Max Serna"
+date: "27/9/2020"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'show'
+    self_contained: true
+  pdf_document:
+    toc: yes
+    toc_depth: 4
+    latex_engine: xelatex
+---
+Visit {https://maxserna.github.io/Data-Course-Project/} to have a full view of this R Markdown file.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+## OverallOverall description
+This Codebook describes the data sets used for this assignment, as well as all transformations made to them and to their variables, as indicated by the Course instructions. 
+
+## The process
+In the following lines, there will be a brief explanation of the code performed in the `run_analysis.R` script.
+
+
+#### ***1. Loading the libraries.***
+There are only two other R packages I used besides the base ones.
+```{r echo=TRUE}
+library(dplyr)
+library(mgsub)
+```
+
+
+#### ***2. Downloading the data.***
+Instead of manually downloading the zip file containing the data, we can use the `tempfile()` function along with `download.file` and `zip` to internally get all the data from the next url: {https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip}.
+`unlink(temp)` closes the connections to the file after all necessary information has been extracted.
+For convenience, I won´t show all that code in here. Reader can reference to the `run_analysis.R` script to see the full example. Next lines show a brief description of the files needed.
+```{r include=FALSE, echo=TRUE}
+features <- read.table("C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/UCI HAR Dataset/features.txt", col.names = c("n","functions"))
+activities <- read.table("C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/UCI HAR Dataset/activity_labels.txt", col.names = c("code", "activity"))
+subject_test <- read.table("C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
+x_test <- read.table("C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/UCI HAR Dataset/test/X_test.txt", col.names = features$functions)
+y_test <- read.table("C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/UCI HAR Dataset/test/y_test.txt", col.names = "code")
+subject_train <- read.table("C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
+x_train <- read.table("C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/UCI HAR Dataset/train/X_train.txt", col.names = features$functions)
+y_train <- read.table("C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/UCI HAR Dataset/train/y_train.txt", col.names = "code")
+```
+*The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ:*
+
+* `features` = `features.txt`. `r ncol(features)` cols and `r nrow(features)` rows
+
+*List of activities performed when the corresponding measurements were taken and its codes (labels):*
+
+* `activities` = `activity_labels.txt`. `r ncol(activities)` cols and `r nrow(activities)` rows
+
+*Contains test data of 9/30 volunteer test subjects being observed:*
+
+* `subject_test` = `test/subject_test.txt`. `r ncol(subject_test)` cols and `r nrow(subject_test)` rows
+
+*Contains recorded features test data:*
+
+* `x_test` = `test/X_test.txt`. `r ncol(x_test)` cols and `r nrow(x_test)` rows
+
+*Contains test data of activities’code labels:*
+
+* `y_test` = `test/y_test.txt`. `r ncol(y_test)` cols and `r nrow(y_test)` rows
+
+*Contains train data of 21/30 volunteer subjects being observed:*
+
+* `subject_train` = `train/subject_train.txt`. `r ncol(subject_train)` cols and `r nrow(subject_train)` rows
+
+*Contains recorded features train data:*
+
+* `x_train` = `train/X_train.txt`. `r ncol(x_train)` cols and `r nrow(x_train)` rows
+
+*Contains train data of activities’code labels:*
+
+* `y_train` = `train/y_train.txt`. `r ncol(y_train)` cols and `r nrow(y_train)` rows
+
+
+#### ***3. Merging our files.***
+As pointed by the Course instructions: *1. Merges the training and the test sets to create one data set.*
+We end up with what I call a "raw" (`raw`) dataset, to which all modifications will be made.
+```{r include=TRUE, echo=TRUE}
+test <- cbind(subject_test,
+              y_test,
+              x_test)
+training <- cbind(subject_train,
+                  y_train,
+                  x_train)
+raw <- rbind(training,
+              test)
+```
+
+
+#### ***4. Keeping the mean and the standard deviation.***
+Just as instruction 2 conducts: *2. Extracts only the measurements on the mean and standard deviation for each measurement.*
+Hence we run the following:
+```{r include=TRUE, echo=TRUE}
+step2 <- raw %>% 
+  select(subject,
+         code,
+         contains(c('mean',
+                    'std')
+         )
+  )
+```
+
+
+#### ***5. Recoding activities column***
+Considering our `step2`data frame generated before, we can see that the following values are listed under the `code`column:
+`r unique(step2$code)`. Let´s also recall that this column contains the values from our `activities`data set but they´re coded rather than showing it´s more comprehensible values. Here's an example `r str(activities)`.
+Hence, instruction 3 from the Course asks us to: *3. Uses descriptive activity names to name the activities in the data set*
+We will assign `step2` to `step3` to continue with the instructions-structure. Note that the script follows this fashion.
+```{r}
+step3 <- step2
+step3$code <- activities[step3$code, 2]
+unique(step3$code)
+```
+
+
+#### ***6. Renaming our variables***
+Point 4 in the Course instructions say: *4. Appropriately labels the data set with descriptive variable names.*
+As of right now, our column names look like these: `r colnames(step3)[3:5]`. We can tell there are some incomprehensible words as tBodyAcc or Gyro (which in fact stand for Time, Body, Accelerometer or Gyroscope). We aim at correcting those by substituting them with clearer names. The following code will do the job.
+```{r echo=TRUE}
+tidy <- step3; rm(step3)
+colnames(tidy)[1:2] <- c('Subject', 'Activities')
+colnames(tidy) <- colnames(tidy) %>% 
+  mgsub(pattern = c('Acc', 'Gyro', 'BodyBody',
+                    'Mag', '^t', '^f',
+                    'tBody', 'mean', 'std',
+                    'freq', 'angle', 'gravity'),
+        replacement = c('Accelerometer', 'Gyroscope', 'Body',
+                        'Magnitude', 'Time', 'Frequency',
+                        'TimeBody', 'Mean', 'STD',
+                        'Frequency', 'Angle', 'Gravity'),
+        ignore.case = TRUE
+  )
+names(tidy)[3:15]
+dim(tidy)
+```
+
+
+#### ***7. Averaging averages and standard deviations (whatever that means)***
+For this final step, we will proceed to summarise our data by each subject in the experiment, as well as by activity, to obtain a nice and clean data frame that shows us some averages.
+This will be conducted by the next chunk of code:
+```{r}
+tidy_means <- tidy %>% 
+  group_by(Subject,
+           Activities) %>% 
+  summarise_all('mean')
+write.table(tidy_means,
+            file = 'C:/Users/max_s/Desktop/EconomíaUDG/Varios/Coursera/G.and.C.Data/Week4/tidy_means.txt',
+            row.names = FALSE)
+tidy_means
+```
+***BOOM!***
+This final data called `tidy_means`is to be exported as a text file named `tidy_means.txt`, that will be submitted to Coursera.
