@@ -2,7 +2,7 @@
 #### Max Serna
 #### 27/09/2020
 
-<p style="text-align: justify;">In this repository I will submit my work on the Coursera's Getting and Cleaning Data Course Project.
+<p align="justify">In this repository I will submit my work on the Coursera's Getting and Cleaning Data Course Project.
 The instructions for it say as following:
 
 ## Course instructions.
