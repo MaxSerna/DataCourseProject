@@ -3,8 +3,13 @@
 #### 27/09/2020
 
 <style>
-body {
-text-align: justify}
+    .reveal .slides {
+        text-align: justify;
+    }
+    .reveal .slides section>* {
+        margin-left: 0;
+        margin-right: 0;
+    }
 </style>
 
 In this repository I will submit my work on the Coursera's Getting and Cleaning Data Course Project.
