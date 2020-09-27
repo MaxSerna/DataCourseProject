@@ -2,7 +2,9 @@
 #### Max Serna
 #### 27/09/2020
 
-<p align="justify">In this repository I will submit my work on the Coursera's Getting and Cleaning Data Course Project.
+<p align="justify">
+
+In this repository I will submit my work on the Coursera's Getting and Cleaning Data Course Project.
 The instructions for it say as following:
 
 ## Course instructions.
@@ -50,4 +52,6 @@ conducts all the necessary code to complete the assignment, and returns the text
 This is the R Markdown file that contains the CodeBook for this project. I recommend the reader to visit (https://maxserna.github.io/DataCourseProject/) to have the complete view. I describe all the data and the code
 used to complete the assignment. Refer to it for any doubt about the script. The `Rmd` script in which the last `html` page relies is 
 named `CodeBook.Rmd`, which is located in here too.
-Alternatively, a PDF file can be found in this repository, as well as the R Markdown script that was used to construct it (see `CodeBookPDF.Rmd`). There are only a few differences between the two `Rmd` scripts that do not alter the code but just the display format.</p>
+Alternatively, a PDF file can be found in this repository, as well as the R Markdown script that was used to construct it (see `CodeBookPDF.Rmd`). There are only a few differences between the two `Rmd` scripts that do not alter the code but just the display format.
+
+</p>
