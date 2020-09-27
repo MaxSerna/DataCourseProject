@@ -40,11 +40,14 @@ You should create one R script called run_analysis.R that does the following.
 
 * *run_analysis.R*
 
-This is the script to run the instructions.
+This is the script to run the instructions. A description for it´s content can be found in the Codebook file. Mainly, the script
+conducts all the necessary code to complete the assignment, and returns the text file that is afterwards submitted to Coursera.
 
 * *Codebook.Rmd*
 
 This is the R Markdown file that contains the CodeBook for this project. I recommend the reader to visit (https://maxserna.github.io/DataCourseProject/) to have the complete view. I describe all the data and the code
-used to complete the assignment. Refer to it for any doubt about the script.
+used to complete the assignment. Refer to it for any doubt about the script. The `Rmd` script in which the last `html` page relies is 
+named `CodeBook.Rmd`, which is located in here too.
+Alternatively, a PDF file can be found in this repository, as well as the R Markdown script that was used to construct it (see `CodeBookPDF.Rmd`). There are only a few differences between the two `Rmd` scripts that do not alter the code but just the display format.
 
 </div>
