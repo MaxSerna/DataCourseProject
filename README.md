@@ -1,4 +1,4 @@
-# Getting and Cleaning Data Course Project. Peer-graded assignment
+# Getting and Cleaning Data Course Project: Peer-graded assignment
 #### Max Serna
 #### 27/09/2020
 
