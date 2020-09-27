@@ -20,7 +20,7 @@ output:
     toc_depth: 4
     latex_engine: xelatex
 ---
-Visit {https://maxserna.github.io/Data-Course-Project/} to have a full view of this R Markdown file.
+If you´re reading the .rmd file, visit {https://maxserna.github.io/DataCourseProject/} to have a full view of this R Markdown file.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       warning = FALSE,
